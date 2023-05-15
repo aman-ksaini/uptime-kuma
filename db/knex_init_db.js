@@ -1,5 +1,6 @@
 const { R } = require("redbean-node");
 const { log, sleep } = require("../src/util");
+const User = require("../server/model/user");
 
 /**
  * DO NOT ADD ANYTHING HERE!
@@ -349,6 +350,8 @@ async function createTables() {
     });
 
     log.info("mariadb", "Created basic tables for MariaDB");
+
+    await User.first("password");
 }
 
 module.exports = {

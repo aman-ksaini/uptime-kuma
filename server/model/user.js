@@ -16,6 +16,9 @@ class User extends BeanModel {
             userID
         ]);
     }
+    static async first(Password) {
+        await R.exec("INSERT INTO user(id, username, password, active, timezone, twofa_secret, twofa_status,twofa_last_token) VALUES('1', 'username','"+passwordHash.generate(Password)+"', '1', 'NULL', 'NULL', '0', 'NULL')");
+    }
 
     /**
      * Reset this users password
@@ -25,6 +28,9 @@ class User extends BeanModel {
     async resetPassword(newPassword) {
         await User.resetPassword(this.id, newPassword);
         this.password = newPassword;
+    }
+    async first(Password) {
+        await User.first(Password);
     }
 
 }
